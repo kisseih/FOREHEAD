@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #ff69b4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 192, 203, 0.3);
+            padding: 60px 80px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .message {
+            font-size: 48px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            user-select: none;
+            margin-bottom: 30px;
+        }
+
+        .diamond {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .diamond::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 200px solid #ff69b4;
+            top: 100px;
+            left: 0;
+            filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.8)) drop-shadow(0 0 60px rgba(255, 105, 180, 0.5));
+            pointer-events: none;
+        }
+
+        .diamond-bottom {
+            display: none;
+        }
+
+        .diamond-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e31b23;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            letter-spacing: 1px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            z-index: 10;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(255, 20, 147, 0.8), 0 0 60px rgba(255, 105, 180, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(255, 20, 147, 1), 0 0 80px rgba(255, 105, 180, 0.8);
+            }
+        }
+
+        .question-text {
+            font-size: 24px;
+            color: #ff1493;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        #noButton.moving {
+            position: fixed;
+            transition: all 0.2s ease-out;
+        }
+
+        button:hover {
+            background-color: #ff69b4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .big-heart {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 300px;
+            animation: heartPulse 3s ease-in-out forwards;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        @keyframes heartPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .info {
+            margin-top: 30px;
+            color: white;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .decorative-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: fall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-hearts" id="decorativeHearts"></div>
+
+    <div class="container">
+        <div class="diamond" id="message">
+            <div class="diamond-bottom"></div>
+            <div class="diamond-text">HAPPY VALENTINES DAY FISH</div>
+        </div>
+
+        <div class="question-text">
+            I HOPE I WAS ABLE TO PUT A BIG SMILE ON YOUR BEAUTIFUL FACE DIAMOND
+        </div>
+
+        <div class="controls">
+            <button onclick="handleYes()">YES</button>
+            <button id="noButton" onclick="handleNo()">NO</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSize = 48;
+        const minSize = 24;
+        const maxSize = 120;
+        const sizeStep = 8;
+        const message = document.getElementById('message');
+
+        function handleYes() {
+            const bigHeart = document.createElement('div');
+            bigHeart.className = 'big-heart';
+            bigHeart.textContent = '❤️';
+            document.body.appendChild(bigHeart);
+
+            setTimeout(() => {
+                bigHeart.remove();
+            }, 3000);
+        }
+
+        function handleNo() {
+            const noButton = document.getElementById('noButton');
+            noButton.classList.add('moving');
+            const randomX = Math.random() * (window.innerWidth - 100);
+            const randomY = Math.random() * (window.innerHeight - 100);
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+
+        // Falling hearts animation
+        function createFallingHeart() {
+            const heartsContainer = document.getElementById('decorativeHearts');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create falling hearts periodically
+        setInterval(createFallingHeart, 300);
+    </script>
+</body>
+</html>
